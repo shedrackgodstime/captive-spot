@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Active Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        input[type="text"]:focus, input[type="email"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .features {
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        .feature-icon {
+            width: 20px;
+            height: 20px;
+            background: #667eea;
+            border-radius: 50%;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+    <script>
+        // Auto-submit form after 30 seconds if user doesn't interact
+        let autoSubmitTimer;
+        
+        function startAutoSubmit() {
+            autoSubmitTimer = setTimeout(function() {
+                document.getElementById('autoSubmitForm').submit();
+            }, 30000); // 30 seconds
+        }
+        
+        function stopAutoSubmit() {
+            clearTimeout(autoSubmitTimer);
+        }
+        
+        // Start auto-submit when page loads
+        window.onload = function() {
+            startAutoSubmit();
+        };
+        
+        // Stop auto-submit if user interacts
+        document.addEventListener('click', stopAutoSubmit);
+        document.addEventListener('keypress', stopAutoSubmit);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">AP</div>
+        <h1>Welcome to Active Portal</h1>
+        <p class="subtitle">Please provide your details to access the internet</p>
+        
+        <form method="POST" action="/submit" id="mainForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <button type="submit" class="btn">Connect to Internet</button>
+        </form>
+        
+        <!-- Auto-submit form for users who don't interact -->
+        <form method="POST" action="/submit" id="autoSubmitForm" style="display: none;">
+            <input type="hidden" name="name" value="Guest User">
+            <input type="hidden" name="email" value="guest@activeportal.com">
+        </form>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">✓</div>
+                <span>Free WiFi Access</span>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">✓</div>
+                <span>Secure Connection</span>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">✓</div>
+                <span>No Data Limits</span>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>By connecting, you agree to our terms of service</p>
+            <p><small>Connection will be granted automatically in 30 seconds</small></p>
+        </div>
+    </div>
+</body>
+</html>
